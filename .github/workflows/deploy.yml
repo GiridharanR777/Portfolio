@@ -9,7 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    # 👇 Set environment variables here (for entire job)
     env:
       AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
@@ -24,6 +23,7 @@ jobs:
       - name: Sync Files to S3
         uses: jakejarvis/s3-sync-action@master
         with:
-          args: --acl public-read --follow-symlinks --delete
+          args: --follow-symlinks --delete  # ✅ fixed line (no --acl)
+
 
       
